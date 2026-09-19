@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playlist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-1:#121014;
+    --bg-2:#1b1720;
+    --card:#1c1820;
+    --line:#332c39;
+    --ink:#f2eef5;
+    --ink-dim:#a79db1;
+    --accent:#1db954;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(circle at 20% 15%, #241f2a 0%, transparent 45%),
+      radial-gradient(circle at 85% 80%, #201a28 0%, transparent 50%),
+      var(--bg-1);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+
+  .card{
+    width:100%;
+    max-width:420px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:22px;
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";
+    position:absolute;
+    top:-60px; right:-60px;
+    width:180px; height:180px;
+    background:radial-gradient(circle, rgba(29,185,84,0.18), transparent 70%);
+    pointer-events:none;
+  }
+
+  .header{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:18px;
+    position:relative;
+    z-index:1;
+  }
+  .disc{
+    width:38px; height:38px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at center, var(--bg-1) 0 15%, transparent 16%),
+      conic-gradient(from 0deg, #2c2632, #201c26, #2c2632);
+    border:1px solid var(--line);
+    flex-shrink:0;
+    animation:spin 6s linear infinite;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  .header-text h1{
+    font-size:15px;
+    font-weight:600;
+    margin:0 0 2px;
+    letter-spacing:0.01em;
+  }
+  .header-text p{
+    font-size:12px;
+    color:var(--ink-dim);
+    margin:0;
+  }
+
+  .embed-wrap{
+    border-radius:12px;
+    overflow:hidden;
+    position:relative;
+    z-index:1;
+    background:#000;
+  }
+  .embed-wrap iframe{
+    display:block;
+    width:100%;
+    height:352px;
+    border:0;
+  }
+
+  .footer{
+    margin-top:16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:relative;
+    z-index:1;
+  }
+  .badge{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:11px;
+    color:var(--ink-dim);
+    letter-spacing:0.04em;
+  }
+  .badge .bars{
+    display:flex;
+    align-items:flex-end;
+    gap:2px;
+    height:12px;
+  }
+  .badge .bars span{
+    width:2px;
+    background:var(--accent);
+    display:inline-block;
+    animation:bar 1s ease-in-out infinite;
+  }
+  .badge .bars span:nth-child(1){ height:40%; animation-delay:0s; }
+  .badge .bars span:nth-child(2){ height:90%; animation-delay:0.15s; }
+  .badge .bars span:nth-child(3){ height:60%; animation-delay:0.3s; }
+  .badge .bars span:nth-child(4){ height:100%; animation-delay:0.45s; }
+  @keyframes bar{
+    0%,100%{ transform:scaleY(0.4); }
+    50%{ transform:scaleY(1); }
+  }
+
+  a.open-link{
+    font-size:11px;
+    color:var(--ink-dim);
+    text-decoration:none;
+    border:1px solid var(--line);
+    padding:6px 10px;
+    border-radius:20px;
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  a.open-link:hover{ border-color:var(--accent); color:var(--ink); }
+
+  @media (prefers-reduced-motion: reduce){
+    .disc, .badge .bars span{ animation:none !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <div class="disc" id="disc"></div>
+      <div class="header-text">
+        <h1>Playlist</h1>
+        <p>Tocando via Spotify</p>
+      </div>
+    </div>
+
+    <div class="embed-wrap">
+      <iframe
+        data-testid="embed-iframe"
+        style="border-radius:12px"
+        src="https://open.spotify.com/embed/playlist/37i9dQZF1DWUZ5bk6qqDSy?utm_source=generator&si=c6377a42cdb24a5d"
+        width="100%"
+        height="352"
+        frameborder="0"
+        allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+      </iframe>
+    </div>
+
+    <div class="footer">
+      <div class="badge">
+        <span class="bars"><span></span><span></span><span></span><span></span></span>
+        Spotify
+      </div>
+      <a class="open-link" href="https://open.spotify.com/playlist/37i9dQZF1DWUZ5bk6qqDSy" target="_blank" rel="noopener noreferrer">Abrir no Spotify ↗</a>
+    </div>
+  </div>
+
+</body>
+</html>
